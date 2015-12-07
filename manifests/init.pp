@@ -27,6 +27,22 @@
 #   String.  Users to filter out of the sssd results
 #   Default: root
 #
+# [*smpl_all_usrs*]
+#  String. Users to allow access to the server
+#  Default: undef
+#
+# [*smpl_den_usrs*]
+#  String. Users to deny access to the server
+#  Default: undef
+#
+# [*smpl_all_grp*]
+#  String. Groups to allow access to the server
+#  Default: undef
+#
+# [*smpl_den_grp*]
+#  String. Groups to deny access to the server
+#  Default: undef
+#
 # [*ldap_base*]
 #   String.  LDAP base to search for LDAP results in
 #   Default: dc=example,dc=org
@@ -101,6 +117,7 @@ class sssd (
   $services           = 'nss,pam',
   $domain             = 'LDAP',
   $provider           = 'ldap',
+  $acc_provider       = undef,
   $filter_groups      = 'root,wheel',
   $filter_users       = 'root',
   $homedir            = undef,
@@ -117,6 +134,10 @@ class sssd (
   $ipa_server         = '_srv_',
   $ipa_dyndns         = true,
   $ipa_server_mode    = false,
+  $smpl_all_usrs      = undef,
+  $smpl_den_usrs      = undef,
+  $smpl_all_grp       = undef,
+  $smpl_den_grp       = undef,
   $manage_nsswitch    = true,
   $logsagent          = undef,
   $debug_level        = '0x02F0',
