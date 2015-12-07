@@ -26,7 +26,23 @@ debug_level = <%= scope.lookupvar('sssd::debug_level') %>
 id_provider = <%= scope.lookupvar('sssd::provider') %>
 auth_provider = <%= scope.lookupvar('sssd::provider') %>
 chpass_provider = <%= scope.lookupvar('sssd::provider') %>
+<% if scope.lookupvar('sssd::provider') == 'ldap' -%>
+access_provider = <%= scope.lookupvar('sssd::acc_provider') %>
+<% if @smpl_all_usrs -%>
+simple_allow_users = <%= scope.lookupvar('sssd::smpl_all_usrs') %>
+<% end -%>
+<% if @smpl_den_usrs -%>
+simple_deny_users = <%= scope.lookupvar('sssd::smpl_den_usrs') %>
+<% end -%>
+<% if @smpl_all_grp -%>
+simple_allow_groups = <%= scope.lookupvar('sssd::smpl_all_grp') %>
+<% end -%>
+<% if @smpl_den_grp -%>
+simple_deny_groups = <%= scope.lookupvar('sssd::smpl_den_grp') %>
+<% end -%>
+<% else -%>
 access_provider = <%= scope.lookupvar('sssd::provider') %>
+<% end -%>
 cache_credentials = true
 <% if scope.lookupvar('sssd::provider') == 'ldap' -%>
 ldap_schema = <%= scope.lookupvar('sssd::ldap_schema') %>
